@@ -1,0 +1,32 @@
+SO: Ubuntu 18.04
+narzędzia: Visual Studio Code, PY CHarm
+technologia: Python
+wersja: 3.6.9
+środowisko programistyczne: Python IDE
+
+
+Klasy:
+	Data_file:
+	Odczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
+
+	Data_interf:
+	Odpowiednia obróbka otrzymanych danych
+
+	Show_Data:
+	Przedstawienie wyników w postaci graficznej
+
+	Graf_interf:
+	Komunikacja z użytkownikem programu
+	
+	Errors:
+	Kontrola występujących błędów
+
+Format danych wejściowych:
+Format: CSV
+Program działa prawidłowo dla danych dostarczonych przez stronę: humdata.org
+https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
+
+Pierwszy wiersz oraz 2. i 3. kolumna jest pomijana.
+Pierwsza kolumna jest przyjmowana przez program jako nazwa obszaru natomiast kolejne kolumny (oprócz 2. i 3.) są przyjmowane jako wartości dla kolejnych dni.
+	
+

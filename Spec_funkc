@@ -1,0 +1,7 @@
+Cel projektu:
+	Graficzne przedstawienie statystyk dotyczących epidemi COVID-19 oraz umożliwienie ich porównania poprzez zestawinie na jednym wykresie
+Funkcjonalności:
+	1. Załadowanie własnych danych
+	2. Graficzne przedstawienie danych na wykresie
+	3. Zestawienie wielu wartości na jednym wykresie
+	4. Wybór poprzez graficzny interface użytkownika danych przeznaczonych do wyświetlenia na wykresie
