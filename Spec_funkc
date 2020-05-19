@@ -1,7 +1,19 @@
 Cel projektu:
 	Graficzne przedstawienie statystyk dotyczących epidemi COVID-19 oraz umożliwienie ich porównania poprzez zestawinie na jednym wykresie
+
 Funkcjonalności:
 	1. Załadowanie własnych danych
-	2. Graficzne przedstawienie danych na wykresie
-	3. Zestawienie wielu wartości na jednym wykresie
-	4. Wybór poprzez graficzny interface użytkownika danych przeznaczonych do wyświetlenia na wykresie
+	2. Graficzne przedstawienie danych na wykresie / Zestawienie wielu wartości na jednym wykresie
+	3. Wybór poprzez graficzny interface użytkownika danych przeznaczonych do wyświetlenia na wykresie
+	4. Wybór opcji przedstawienia
+
+Interface Użytkownika:
+	Graficzny interfejs użytkownika został zilustrowany w pliku [projekt_GUI.jpg]. Został on podzielony na 4 sekcje:
+		1. Sekcja: 
+			Wykres ilustrujący wybrane przez użytkownika dane. Może przedstawiać wiele zbiorów dany w tym samym czasie.
+		2. Sekcja:
+			Wczytywanie danych. Program obsługuje pliki csv (dane oddzielone przecinkiami i znakami nowej linii, z pominięciem 2 i 3 kolumny). Aby załadować plik należy nacisnć przycisk "Załaduj dane", a następnie wybrać odpowiedni plik z dysku własnego komputera
+		3. Sekscja:
+			Naciśnięciem odpowiedniego przycisku wybieramy z których państw dane chcemy zobaczyć na wykresie. Ponowne nacisnięcie tego samego przycisku powoduje usunięcie danych z wykresu
+		4. Sekcja:
+			Wybieramy poprzez odznaczenie odpowiedniej kratki opcje wykresu: skala logarytmiczna,  widok legendy

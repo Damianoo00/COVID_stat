@@ -3,6 +3,7 @@ narzędzia: Visual Studio Code, PY CHarm
 technologia: Python
 wersja: 3.6.9
 środowisko programistyczne: Python IDE
+biblioteki: PyQt
 
 
 Klasy:
@@ -17,11 +18,25 @@ Klasy:
 
 	Graf_interf:
 	Komunikacja z użytkownikem programu
+		Section:
+		podział przestrzeni GUI na sekcje
+
+		Section_country_button(Section):
+		Przyciski do wyboru danych z państw do przedstawienia na wykresie
+
+		Section_file_add_button(Section):
+		Przycisk do wczytywania danych
+
+		Section_Graph(Section):
+		Przedstawienie wykresów
+
+		Section_checkbox(Section):
+		Wybór opcji wykresu	
 	
 	Errors:
 	Kontrola występujących błędów
 
-Format danych wejściowych:
+Dane wejściowe:
 Format: CSV
 Program działa prawidłowo dla danych dostarczonych przez stronę: humdata.org
 https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
