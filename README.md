@@ -1,5 +1,5 @@
 # COVID_stat
 Projek na Programowanie Obiektowe
 
-Proponuje diagram klas zrobić przy użyciu aplikacji Creately:
-https://app.creately.com/diagram/Kc6yHGlW3hA/edit
+Specyfikacja implementacyjna: https://github.com/Damianoo00/COVID_stat/blob/master/Spec_Impl<br>
+Specyfikacja funkcjonalna: https://github.com/Damianoo00/COVID_stat/blob/master/Spec_funkc
