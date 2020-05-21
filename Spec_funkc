@@ -26,7 +26,7 @@ Wykres ilustrujący wybrane przez użytkownika dane. Może przedstawiać wiele z
 
 2. Sekcja: 
 
-Wczytywanie danych. Program obsługuje pliki csv (dane oddzielone przecinkami i znakami nowej linii, z pominięciem 2 i 3 kolumny). Aby załadować plik należy nacisnąć przycisk "Załaduj dane", a następnie wybrać odpowiedni plik z dysku własnego komputera. 
+Wczytywanie danych. Program obsługuje pliki csv. Aby załadować plik należy nacisnąć przycisk "Załaduj dane", a następnie wybrać odpowiedni plik z dysku własnego komputera. 
 
 3. Sekcja: 
 

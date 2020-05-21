@@ -10,8 +10,6 @@ Klasy:
 	Klasa zbiorcza
 
 		Data:
-			Data_file:
-			Odczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
 
 			Data_interf:
 			Odpowiednia obróbka otrzymanych danych
@@ -33,9 +31,12 @@ Klasy:
 			Graph:
 			Graficzne przedstawienie danych na wykresie
 
-			Section_add_file:
+			Add_file:
+			Graficzne przedstawienie opcji ładowania danych
+
+			Section_add_file(Section):
 			Sekcja łądowania danych
-				Add_file:
+				Add_file_konkretny(Add_file):
 				Dodawanie plikow danych
 
 
@@ -74,6 +75,7 @@ Klasy:
 
 			No_data:
 			Nie wprowadzono danych
+Diagram klas [COVID_stat (1).png]
 
 Dane wejściowe:
 Format: CSV
