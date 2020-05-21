@@ -10,6 +10,8 @@ Klasy:
 	Klasa zbiorcza
 
 		Data:
+			Data_file:
+			Wczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
 
 			Data_interf:
 			Odpowiednia obróbka otrzymanych danych
@@ -32,12 +34,12 @@ Klasy:
 			Graficzne przedstawienie danych na wykresie
 
 			Add_file:
-			Graficzne przedstawienie opcji ładowania danych
+			Graficzne przedstawienie opcji przekazania danych
 
-			Section_add_file(Section):
-			Sekcja łądowania danych
-				Add_file_konkretny(Add_file):
-				Dodawanie plikow danych
+			Section_add_file:
+			Sekcja ładowania danych
+				Add_file_konkret:
+				Dodawanie plików danych		
 
 
 			Section_list_of_countries(Section):
@@ -54,7 +56,7 @@ Klasy:
 			Przedstawienie wykresów
 
 				Graph_of_country(Graph):
-				Wykres danych wybranych z listy
+				Wykres wybranych danych z listy
 
 			Section_checkbox(Section):
 			Wybór opcji wykresu
@@ -75,14 +77,12 @@ Klasy:
 
 			No_data:
 			Nie wprowadzono danych
-Diagram klas [COVID_stat (1).png]
 
 Dane wejściowe:
 Format: CSV
 Program działa prawidłowo dla danych dostarczonych przez stronę: humdata.org
 https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
 
-Pierwszy wiersz oraz 2. i 3. kolumna są pomijane.
-Pierwsza kolumna jest przyjmowana przez program jako nazwa obszaru natomiast kolejne kolumny (oprócz 2. i 3.) są przyjmowane jako wartości dla kolejnych dni.
+Pierwszy wiersz (nazwy opisujące kolumny danych) oraz kolumny pierwsza (osobne dane dla poszczególnych rejonów w danym państwie, jeśli zostały podane), trzecia i czwarta (długość i szerokość geograficzna państwa lub rejonu) są pomijane. Za wyjątkiem wyżej wymienionych program interpretuje wartości w drugiej kolumnie jako nazwy państw, a wartości w kolejnych kolumnach jako ilość wykrytych zachorowań dla kolejnych dni.
 	
 
