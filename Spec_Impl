@@ -9,14 +9,15 @@ Klasy:
 	COVID_stat:
 	Klasa zbiorcza
 
-		Data_file:
-		Odczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
+		Data:
+			Data_file:
+			Odczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
 
-		Data_interf:
-		Odpowiednia obróbka otrzymanych danych
+			Data_interf:
+			Odpowiednia obróbka otrzymanych danych
 
-		Show_Data:
-		Przedstawienie wyników w postaci graficznej
+			Show_Data:
+			Przedstawienie wyników w postaci graficznej
 
 		Graf_interf:
 		Komunikacja z użytkownikem programu
@@ -26,8 +27,17 @@ Klasy:
 			List:
 			Graficzne przedstawienie listy
 
-			Section_country_button(Section):
-			Przyciski do wyboru danych z państw do przedstawienia na wykresie
+			Checkbox:
+			Graficzne przedstawienie checkboxa
+
+			Graph:
+			Graficzne przedstawienie danych na wykresie
+
+			Section_add_file:
+			Sekcja łądowania danych
+				Add_file:
+				Dodawanie plikow danych
+
 
 			Section_list_of_countries(Section):
 			Sekcja wyboru danych
@@ -42,8 +52,19 @@ Klasy:
 			Section_Graph(Section):
 			Przedstawienie wykresów
 
+				Graph_of_country(Graph):
+				Wykres danych wybranych z listy
+
 			Section_checkbox(Section):
-			Wybór opcji wykresu	
+			Wybór opcji wykresu
+
+				Logaritmic_checkbox(Checkbox):
+				Wybór skali logarytmicznej
+
+				Legend_checkbox(Checkbox):
+				Wybór wyświetlenia legendy
+
+					
 		
 		Errors:
 		Kontrola występujących błędów

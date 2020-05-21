@@ -27,9 +27,7 @@ class From_File:
 
 
 
-if __name__ == "__main__":
-    list_of_countries = From_File.get_list_of_countries("time_series_covid19_confirmed_global.csv")
-    print(list_of_countries)
-    print(From_File.read_data_for_country("time_series_covid19_confirmed_global.csv", list_of_countries[30]))
+
+
 
 
