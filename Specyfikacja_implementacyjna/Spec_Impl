@@ -1,0 +1,88 @@
+SO: Ubuntu 18.04, Windows
+środowisko programistyczne: Visual Studio Code, PY CHarm
+technologia: Python
+wersja: 3.6.9
+biblioteki: PyQt
+
+
+Klasy:
+	COVID_stat:
+	Klasa zbiorcza
+
+		Data:
+			Data_file:
+			Wczytanie odpowiednich danych z pliku do pamięci operacyjnej komputera
+
+			Data_interf:
+			Odpowiednia obróbka otrzymanych danych
+
+			Show_Data:
+			Przedstawienie wyników w postaci graficznej
+
+		Graf_interf:
+		Komunikacja z użytkownikem programu
+			Section:
+			podział przestrzeni GUI na sekcje
+
+			List:
+			Graficzne przedstawienie listy
+
+			Checkbox:
+			Graficzne przedstawienie checkboxa
+
+			Graph:
+			Graficzne przedstawienie danych na wykresie
+
+			Add_file:
+			Graficzne przedstawienie opcji przekazania danych
+
+			Section_add_file:
+			Sekcja ładowania danych
+				Add_file_konkret:
+				Dodawanie plików danych		
+
+
+			Section_list_of_countries(Section):
+			Sekcja wyboru danych
+
+				List_of_all_countries(List):
+				Lista wyboru wszystkich państw
+				
+				List_of_chosen_countries(List):
+				Lista wybranych państw wyświetlanych na wykresie
+					
+
+			Section_Graph(Section):
+			Przedstawienie wykresów
+
+				Graph_of_country(Graph):
+				Wykres wybranych danych z listy
+
+			Section_checkbox(Section):
+			Wybór opcji wykresu
+
+				Logaritmic_checkbox(Checkbox):
+				Wybór skali logarytmicznej
+
+				Legend_checkbox(Checkbox):
+				Wybór wyświetlenia legendy
+
+					
+		
+		Errors:
+		Kontrola występujących błędów
+			
+			Incorrect_insert_data:
+			Wprowadzono niepoprawne dane
+
+			No_data:
+			Nie wprowadzono danych
+
+Dane wejściowe:
+Format: CSV
+Program działa prawidłowo dla danych dostarczonych przez stronę: humdata.org
+https://data.humdata.org/dataset/novel-coronavirus-2019-ncov-cases
+
+Pierwszy wiersz (nazwy opisujące kolumny danych) oraz kolumny pierwsza (osobne dane dla poszczególnych rejonów w danym państwie, jeśli zostały podane), trzecia i czwarta (długość i szerokość geograficzna państwa lub rejonu) są pomijane. Za wyjątkiem wyżej wymienionych program interpretuje wartości w drugiej kolumnie jako nazwy państw, a wartości w kolejnych kolumnach jako ilość wykrytych zachorowań dla kolejnych dni.
+	
+
