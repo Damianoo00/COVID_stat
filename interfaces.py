@@ -16,6 +16,6 @@ class Data_interface:
 if __name__ == "__main__":
     PATH = "time_series_covid19_confirmed_global.csv"
     
-    print(Data_interface.get_country_list(PATH))
-    print(Data_interface.get_cases_for_countrys_in_string(PATH, "Poland"))
+    #print(Data_interface.get_country_list(PATH))
+    print(Data_interface.get_cases_for_countrys_in_string(PATH, Data_interface.get_country_list(PATH)[2]))
     
