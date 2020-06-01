@@ -6,29 +6,33 @@ class Okno(QWidget):
         
     
 class Section(Okno):
-    def __init__(self, etykieta, x, y):
-        self.__etykieta = etykieta
+    def __init__(self, x, y):
         self.__x = x
         self.__y = y
 class List:
     l = [1,2,3,4]
 
 class Section_add_file(Section):
-    def __init__(self, etykieta, x, y):
-        super().__init__(etykieta, x, y)
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.__etykieta = "add_fle"
+    def add(self, arg, etykieta2):
+        return arg.addWidget(etykieta2,self.__x, self.__y)
 
 class Section_list_of_countries(Section):
     def __init__(self, etykieta, x, y):
-        super().__init__(etykieta, x, y)
-
+        super().__init__(x, y)
+        self.__etykieta = "list_of_countries"
 
 class Section_Graph(Section):
     def __init__(self, etykieta, x, y):
-        super().__init__(etykieta, x, y)
+        super().__init__(x, y)
+        self.__etykieta = "wykres"
 
 class Section_checkbox(Section):
     def __init__(self, etykieta, x, y):
-        super().__init__(etykieta, x, y)
+        super().__init__(x, y)
+        self.__etykieta = "checkbox"
 
 class List_of_all_countries:
     pass
