@@ -27,9 +27,14 @@ class Covidstat(QWidget):
         graphWidget = pg.PlotWidget()
         y = interfaces.Data_interface.list_of_cases_in_country("China")
         x = [i for i in range(len(y))]
+        y2 = interfaces.Data_interface.list_of_cases_in_country("US")
+        x2 = [i for i in range(len(y))]
         
         graphWidget.setBackground('w')
-        graphWidget.plot(x, y, pen='r')
+        graphWidget.addLegend()
+        graphWidget.plot(x, y, pen='r', name="China")
+        graphWidget.plot(x2, y2, pen='b', name="US")
+        
         Uklad.addWidget(graphWidget, 0,0)
 # Sekcja wczytywania danych
         b1 = QPushButton("wczytaj dane")        
@@ -42,6 +47,7 @@ class Covidstat(QWidget):
             listWidget.addItem(country)
         Uklad.addWidget(listWidget, 1,0)
 # Sekcja Checkbox
+        poduklad = QGridLayout()
         b1 = QCheckBox("Opcja 1")
         Uklad.addWidget(b1,1,1)
              

@@ -10,7 +10,11 @@ class Section(Okno):
         self.__x = x
         self.__y = y
 class List_of_countries:
-    pass
+    def __init__(self, countryname):
+        self.countryname = countryname
+        self.createwidget()
+    def createwidget(self):
+        return listWidget.addItem(country)
     
 
 class Section_add_file(Section):

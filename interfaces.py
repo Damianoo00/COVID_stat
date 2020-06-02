@@ -21,4 +21,3 @@ class Data_interface:
         dicta = Data_interface.get_cases_for_countrys_in_string("time_series_covid19_confirmed_global.csv", countryname)
         return dicta[countryname]
         
-
