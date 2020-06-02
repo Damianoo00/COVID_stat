@@ -27,10 +27,16 @@ class Covidstat(QWidget):
         graphWidget = pg.PlotWidget()
         y = [30,32,34,32,33,31,29,32,35,45]
         x = [i for i in range(len(y))]
-        graphWidget.plot(x, y)
+        y2 = [3,3,3,3,4,31,29,32,35,45]
+        x2 = [i for i in range(len(y))]
+        graphWidget.setBackground('w')
+        graphWidget.plot(x, y, pen='r')
+        
+        graphWidget.plot(x2, y2, pen='b')
         Uklad.addWidget(graphWidget, 0,0)
-# Sekcja wczytywania danych        
-        Uklad.addWidget(etykieta2, 0,1)
+# Sekcja wczytywania danych
+        b1 = QPushButton("wczytaj dane")        
+        Uklad.addWidget(b1, 0,1)
 # Sekcja listy państw      
         listWidget = QListWidget(self)
         listWidget.resize(100,75)
@@ -41,7 +47,7 @@ class Covidstat(QWidget):
 # Sekcja Checkbox
         b1 = QCheckBox("Opcja 1")
         Uklad.addWidget(b1,1,1)
-     
+             
         self.setLayout(Uklad)
 
 if __name__ == '__main__':

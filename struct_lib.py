@@ -9,8 +9,9 @@ class Section(Okno):
     def __init__(self, x, y):
         self.__x = x
         self.__y = y
-class List:
-    l = [1,2,3,4]
+class List_of_countries:
+    pass
+    
 
 class Section_add_file(Section):
     def __init__(self, x, y):
@@ -30,9 +31,11 @@ class Section_Graph(Section):
         self.__etykieta = "wykres"
 
 class Section_checkbox(Section):
-    def __init__(self, etykieta, x, y):
+    def __init__(self, x, y):
         super().__init__(x, y)
         self.__etykieta = "checkbox"
+    
+
 
 class List_of_all_countries:
     pass
