@@ -25,14 +25,11 @@ class Covidstat(QWidget):
         Uklad = QGridLayout()
 # Sekcja Wykres 
         graphWidget = pg.PlotWidget()
-        y = [30,32,34,32,33,31,29,32,35,45]
+        y = interfaces.Data_interface.list_of_cases_in_country("China")
         x = [i for i in range(len(y))]
-        y2 = [3,3,3,3,4,31,29,32,35,45]
-        x2 = [i for i in range(len(y))]
+        
         graphWidget.setBackground('w')
         graphWidget.plot(x, y, pen='r')
-        
-        graphWidget.plot(x2, y2, pen='b')
         Uklad.addWidget(graphWidget, 0,0)
 # Sekcja wczytywania danych
         b1 = QPushButton("wczytaj dane")        

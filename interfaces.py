@@ -17,4 +17,8 @@ class Data_interface:
         for country in lista:
             s=s+","+country
         return s
+    def list_of_cases_in_country(countryname):
+        dicta = Data_interface.get_cases_for_countrys_in_string("time_series_covid19_confirmed_global.csv", countryname)
+        return dicta[countryname]
+        
 
