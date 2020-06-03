@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QApplication ,QWidget, QGridLayout, QLabel, QFileDia
 from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
 import sys
-import struct_lib, interfaces
+import struct_lib, interfaces, activities
 
 class Covidstat(QWidget):
     def __init__(self, parent=None):
@@ -24,18 +24,9 @@ class Covidstat(QWidget):
         
         Uklad = QGridLayout()
 # Sekcja Wykres 
-        graphWidget = pg.PlotWidget()
-        y = interfaces.Data_interface.list_of_cases_in_country("China")
-        x = [i for i in range(len(y))]
-        y2 = interfaces.Data_interface.list_of_cases_in_country("US")
-        x2 = [i for i in range(len(y))]
         
-        graphWidget.setBackground('w')
-        graphWidget.addLegend()
-        graphWidget.plot(x, y, pen='r', name="China")
-        graphWidget.plot(x2, y2, pen='b', name="US")
+        plot = activities.show_plot(Uklad, True,False)
         
-        Uklad.addWidget(graphWidget, 0,0)
 # Sekcja wczytywania danych
         b1 = QPushButton("wczytaj dane")        
         Uklad.addWidget(b1, 0,1)
@@ -47,9 +38,13 @@ class Covidstat(QWidget):
             listWidget.addItem(country)
         Uklad.addWidget(listWidget, 1,0)
 # Sekcja Checkbox
-        poduklad = QGridLayout()
-        b1 = QCheckBox("Opcja 1")
+        
+        b1 = QCheckBox("Legenda")
+        b1.setChecked(True)
+        b1.stateChanged.connect(lambda:activities.checkboxstate(Uklad,b1.isChecked(), "Legenda"))
+        b2 = QCheckBox("Skala logarytmiczna")
         Uklad.addWidget(b1,1,1)
+        Uklad.addWidget(b2,2,1)
              
         self.setLayout(Uklad)
 
@@ -57,3 +52,4 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     okno = Covidstat()
     sys.exit(app.exec_())
+
