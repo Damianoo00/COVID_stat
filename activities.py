@@ -24,3 +24,14 @@ def checkboxstate(Uklad, Is_checked, s):
             show_plot(Uklad, True, False)
         else:
             show_plot(Uklad, False, False)
+
+def listactiv(Uklad, countryname):
+    print(countryname)
+    #graphWidget = pg.PlotWidget()
+    #y = interfaces.Data_interface.list_of_cases_in_country("China")
+    #x = [i for i in range(len(y))]      
+    #graphWidget.setBackground('w')
+    #graphWidget.addLegend()   
+    #graphWidget.plot(x, y, pen='r', name=countryname)
+    #Uklad.addWidget(graphWidget, 0,0)
+

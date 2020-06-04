@@ -29,7 +29,7 @@ class From_File:
             list_of_coutries = []
             for line in f:
                 list_of_coutries.append(line.split(",")[1])
-            return list(set(list_of_coutries))
+            return sorted(list(set(list_of_coutries)))
 
 
 
