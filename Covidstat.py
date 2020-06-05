@@ -4,11 +4,12 @@ import pyqtgraph as pg
 import sys
 import struct_lib, interfaces, activities
 
-DATA_PATH = "time_series_covid19_confirmed_global.csv"
+DATA_PATH = ""
 LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT = []
 IS_LEGEND = True
 X_LOGARYTHMIC = False
 Y_LOGARYTHMIC = False
+Uklad = 0
 
 class Covidstat(QWidget):
     def __init__(self, parent=None):
@@ -16,16 +17,21 @@ class Covidstat(QWidget):
 
         self.interface()
     
-    def getfile(self):
+    def getfile(self, Uklad):
         global DATA_PATH
-        fname = QFileDialog.getOpenFileName(self, 'Open file', 
-        'c:\\',"(*.csv)")
-        DATA_PATH = fname[0]
+        try:
+                fname = QFileDialog.getOpenFileName(self, 'Open file', 
+                'c:\\',"(*.csv)")
+                DATA_PATH = fname[0]
+        except:
+                print("brak pliku")
+        show_list()
         
         
         
 
     def interface(self):
+        global Uklad
         self.resize(600,300)
         self.setWindowTitle("COVID statystyki")
         self.show()
@@ -48,15 +54,7 @@ class Covidstat(QWidget):
         Uklad.addWidget(afbtn, 0,1)
         
 # Sekcja listy państw   
-        global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
-        listWidget = QListWidget(self)
-        listWidget.resize(100,75)
-        list_of_countries = interfaces.Data_interface.get_country_list(DATA_PATH)
-        for country in list_of_countries:
-                listWidget.addItem(country)
-        listWidget.itemClicked.connect(lambda item: listclickedaction(item, Uklad))
-        Uklad.addWidget(listWidget, 1,0)
-        print(LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT)
+        show_list()
         
 # Sekcja Checkbox
         
@@ -107,7 +105,21 @@ def listclickedaction(item, Uklad):
         else:
                 LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
         show_plot(Uklad)
-
+def show_list():
+        global Uklad
+        global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
+        print(DATA_PATH)
+        listWidget = QListWidget()
+        listWidget.resize(100,75)
+        try:
+                list_of_countries = interfaces.Data_interface.get_country_list(DATA_PATH)
+                for country in list_of_countries:
+                                listWidget.addItem(country)
+                listWidget.itemClicked.connect(lambda item: listclickedaction(item, Uklad))
+        except:
+                print("Problem z danymi")
+        Uklad.addWidget(listWidget, 1,0)
+        print(LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT)
 def checkboxstate(Uklad, s):
 
         global IS_LEGEND
