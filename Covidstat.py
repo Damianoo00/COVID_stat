@@ -73,7 +73,6 @@ class Covidstat(QWidget):
              
         self.setLayout(Uklad)
         
-        
 
 
 
@@ -103,7 +102,10 @@ def show_plot(Uklad):
 
 def listclickedaction(item, Uklad):
         global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
-        LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
+        if item.text() in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
+                LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.remove(item.text())
+        else:
+                LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
         show_plot(Uklad)
 
 def checkboxstate(Uklad, s):
