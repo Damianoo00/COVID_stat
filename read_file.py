@@ -39,6 +39,6 @@ class From_File:
                     it = it +1
                 return sorted(list(set(list_of_coutries)))
         except:
-            print("Nie można otworzyć pliku")
+            print("[Błąd]: Nie możana odczytać wartości")
 
 
