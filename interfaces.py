@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QApplication ,QWidget, QGridLayout, QLabel, QFileDia
 from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
 import sys
-import struct_lib
 import read_file
 
 class Data_interface:
@@ -17,7 +16,8 @@ class Data_interface:
         for country in lista:
             s=s+","+country
         return s
-    def list_of_cases_in_country(countryname):
-        dicta = Data_interface.get_cases_for_countrys_in_string("time_series_covid19_confirmed_global.csv", countryname)
+    def list_of_cases_in_country(countryname, filepath):
+        dicta = Data_interface.get_cases_for_countrys_in_string(filepath, countryname)
         return dicta[countryname]
+    
         

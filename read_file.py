@@ -42,5 +42,3 @@ class From_File:
             print("Nie można otworzyć pliku")
 
 
-
-

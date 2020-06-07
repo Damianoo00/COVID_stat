@@ -1,8 +1,10 @@
 from PyQt5.QtWidgets import QApplication ,QWidget, QGridLayout, QLabel, QFileDialog, QPushButton, QListWidget, QCheckBox, QButtonGroup
 from pyqtgraph import PlotWidget, plot
-import pyqtgraph as pg
+from lib_repair import pyqtgraph as pg
 import sys
-import struct_lib, interfaces, activities
+import interfaces
+import numpy as np
+
 
 DATA_PATH = ""
 LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT = []
@@ -26,7 +28,7 @@ class Covidstat(QWidget):
                 DATA_PATH = fname[0]
         except:
                 print("brak pliku")
-        Section_list_of_countries(0,1).show_section()
+        Section_list_of_countries(0,1).add_section()
         
         
         
@@ -52,6 +54,7 @@ class Covidstat(QWidget):
         Section_list_of_countries(0,1).add_section()       
 # Sekcja Checkbox
         Section_checkbox(2,1).add_section()
+        #legend_checkbox(1 ,1).add_checkbox()
         self.setLayout(Uklad)
 
 
@@ -61,12 +64,13 @@ class Section:
         def __init__(self,x,y):
                 self.x = x
                 self.y =y
+        def add_section():
+                pass
 class Section_add_file(Section):
         def __init__(self, x, y, text_on_button):
                 super().__init__(x,y)
                 self.text_on_button = text_on_button
                 
-                self.show_section()
         def show_section(self):
                 afbtn = QPushButton(self.text_on_button)
                 afbtn.clicked.connect(Covidstat.getfile)
@@ -75,8 +79,6 @@ class Section_list_of_countries(Section):
         def __init__(self, x, y):
                 super().__init__(x,y)
                 
-                
-                self.add_section()
         def add_section(self):
                 global Uklad
                 global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
@@ -87,11 +89,11 @@ class Section_list_of_countries(Section):
                         list_of_countries = interfaces.Data_interface.get_country_list(DATA_PATH)
                         for country in list_of_countries:
                                         listWidget.addItem(country)
-                        listWidget.itemClicked.connect(lambda item: self.action_on_click(item, Uklad))
+                        listWidget.itemClicked.connect(lambda item: self.action_on_click(item))
                 except:
                         print("Problem z danymi")
                 Uklad.addWidget(listWidget, self.y,self.x)
-        def action_on_click(self, item, Uklad):
+        def action_on_click(self, item):
                 global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
                 if item.text() in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.remove(item.text())
@@ -99,44 +101,68 @@ class Section_list_of_countries(Section):
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
         
                 Section_Graph(1,1).add_section()
+class Checkbox:
+        def __init__(self,x,y):
+                self.x = x
+                self.y = y
+                self.boolen = boolen = None
+                self.text = text = None
+                
+        def add_checkbox(self):
+                b1 = QCheckBox(self.text)
+                b1.setChecked(self.boolen)
+                b1.stateChanged.connect(lambda:self.action_on_click())
+                Uklad.addWidget(b1,self.x,self.y)
+        def action_on_click(self):
+                pass
+class legend_checkbox(Checkbox):
+        def __init__(self,x,y):
+                super().__init__(x,y)
+                self.boolen = True
+                self.text = "legenda"
+        def action_on_click(self):
+                global IS_LEGEND
+                if IS_LEGEND == True:
+                        IS_LEGEND = False
+                else:
+                        IS_LEGEND = True
+                Section_Graph(1,1).add_section()
+class y_axis_log_checkbox(Checkbox):
+        def __init__(self,x,y):
+                super().__init__(x,y)
+                self.boolen = False
+                self.text = "Skala logarytmiczna na Osi Y"
+        def action_on_click(self):
+                global Y_LOGARYTHMIC
+                if Y_LOGARYTHMIC == True:
+                        Y_LOGARYTHMIC = False
+                else:
+                        Y_LOGARYTHMIC = True
+                Section_Graph(1,1).add_section()
+class x_axis_log_checkbox(Checkbox):
+        def __init__(self,x,y):
+                super().__init__(x,y)
+                self.boolen = False
+                self.text = "Skala logarytmiczna na Osi X"
+        def action_on_click(self):
+                global X_LOGARYTHMIC
+                if X_LOGARYTHMIC == True:
+                        X_LOGARYTHMIC = False
+                else:
+                        X_LOGARYTHMIC = True
+                Section_Graph(1,1).add_section()
 class Section_checkbox(Section):
         def __init__(self, x, y):
                 super().__init__(x,y)
 
         def add_section(self):
-                b1 = QCheckBox("Legenda")
-                b1.setChecked(True)
-                b1.stateChanged.connect(lambda:self.checkboxstate(Uklad,"legend"))
-                b2 = QCheckBox("Skala logarytmiczna osi X")
-                b2.stateChanged.connect(lambda:self.checkboxstate(Uklad,"x_log"))
-                b3 = QCheckBox("Skala logarytmiczna osi y")
-                b3.stateChanged.connect(lambda:self.checkboxstate(Uklad,"y_log"))
-                Uklad.addWidget(b1,2,1)
-                Uklad.addWidget(b2,3,1)
-                Uklad.addWidget(b3,4,1)
-        def checkboxstate(self,Uklad, s):
+                legend_checkbox(1,1).add_checkbox()
+                y_axis_log_checkbox(2,1).add_checkbox()
+                x_axis_log_checkbox(3,1).add_checkbox()
+        
 
-                global IS_LEGEND
-                global X_LOGARYTHMIC
-                global Y_LOGARYTHMIC
-                if s == "legend":
-                        if IS_LEGEND == True:
-                                IS_LEGEND = False
-                                #Section_Graph(1,1).add_section()
-                        else:
-                                IS_LEGEND = True
-                                
-                if s == "x_log":
-                        if X_LOGARYTHMIC == False:
-                                X_LOGARYTHMIC = True
-                        else:
-                                X_LOGARYTHMIC = False
-                if s == "y_log":
-                        if Y_LOGARYTHMIC == True:
-                                Y_LOGARYTHMIC = False
-                        else:
-                                Y_LOGARYTHMIC = True
-                Section_Graph(1,1).add_section()
+
+
 class Section_Graph(Section):
         def __init__(self,x,y):
                 super().__init__(x,y)
@@ -149,14 +175,21 @@ class Section_Graph(Section):
                 
                 i = 0
                 for country in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
-                        print(country)
-                        y = interfaces.Data_interface.list_of_cases_in_country(country)
+                        y = interfaces.Data_interface.list_of_cases_in_country(country,DATA_PATH)
                         x = [i for i in range(len(y))]
+                        #if Y_LOGARYTHMIC == True:
+                        #        y = np.array(y)
+                        #        y = np.where(y>0, np.log10(y), 0)
+                        #if X_LOGARYTHMIC == True:
+                        #        x = np.array(x)
+                        #        x = np.where(x>0, np.log10(x), 0)
                         graphWidget.plot(x, y, pen=colors[i%8], name=country)
+                        graphWidget.setLogMode(X_LOGARYTHMIC,Y_LOGARYTHMIC)
+                        
                         i = i+1
-                graphWidget.setLogMode(X_LOGARYTHMIC, Y_LOGARYTHMIC)
+                
                 Uklad.addWidget(graphWidget, 0,0)
-
+                
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     okno = Covidstat()
