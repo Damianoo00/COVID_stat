@@ -44,7 +44,7 @@ class Covidstat(QWidget):
         Uklad = QGridLayout()
 # Sekcja Wykres 
         
-        Section_Graph(1,1).add_section()       
+        Section_Graph(0,0).add_section()       
 # Sekcja wczytywania danych
         afbtn = QPushButton("wczytaj dane")
         afbtn.clicked.connect(self.getfile)
@@ -63,7 +63,7 @@ class Covidstat(QWidget):
 class Section:
         def __init__(self,x,y):
                 self.x = x
-                self.y =y
+                self.y = y
         def add_section():
                 pass
 class Section_add_file(Section):
@@ -82,7 +82,6 @@ class Section_list_of_countries(Section):
         def add_section(self):
                 global Uklad
                 global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
-                #print(DATA_PATH)
                 listWidget = QListWidget()
                 listWidget.resize(100,75)
                 try:
@@ -100,7 +99,7 @@ class Section_list_of_countries(Section):
                 else:
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
         
-                Section_Graph(1,1).add_section()
+                Section_Graph(0,0).add_section()
 class Checkbox:
         def __init__(self,x,y):
                 self.x = x
@@ -126,7 +125,7 @@ class legend_checkbox(Checkbox):
                         IS_LEGEND = False
                 else:
                         IS_LEGEND = True
-                Section_Graph(1,1).add_section()
+                Section_Graph(0,0).add_section()
 class y_axis_log_checkbox(Checkbox):
         def __init__(self,x,y):
                 super().__init__(x,y)
@@ -138,7 +137,7 @@ class y_axis_log_checkbox(Checkbox):
                         Y_LOGARYTHMIC = False
                 else:
                         Y_LOGARYTHMIC = True
-                Section_Graph(1,1).add_section()
+                Section_Graph(0,0).add_section()
 class x_axis_log_checkbox(Checkbox):
         def __init__(self,x,y):
                 super().__init__(x,y)
@@ -150,7 +149,7 @@ class x_axis_log_checkbox(Checkbox):
                         X_LOGARYTHMIC = False
                 else:
                         X_LOGARYTHMIC = True
-                Section_Graph(1,1).add_section()
+                Section_Graph(0,0).add_section()
 class Section_checkbox(Section):
         def __init__(self, x, y):
                 super().__init__(x,y)
@@ -167,6 +166,12 @@ class Section_Graph(Section):
         def __init__(self,x,y):
                 super().__init__(x,y)
         def add_section(self):
+                Graph(self.x,self.y).addgraph()
+                
+class Graph(Section_Graph):
+        def __init__(self, x,y):
+                super().__init__(x,y)
+        def addgraph(self):
                 graphWidget = pg.PlotWidget()
                 graphWidget.setBackground('w')
                 colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
@@ -177,18 +182,13 @@ class Section_Graph(Section):
                 for country in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
                         y = interfaces.Data_interface.list_of_cases_in_country(country,DATA_PATH)
                         x = [i for i in range(len(y))]
-                        #if Y_LOGARYTHMIC == True:
-                        #        y = np.array(y)
-                        #        y = np.where(y>0, np.log10(y), 0)
-                        #if X_LOGARYTHMIC == True:
-                        #        x = np.array(x)
-                        #        x = np.where(x>0, np.log10(x), 0)
                         graphWidget.plot(x, y, pen=colors[i%8], name=country)
                         graphWidget.setLogMode(X_LOGARYTHMIC,Y_LOGARYTHMIC)
                         
                         i = i+1
                 
-                Uklad.addWidget(graphWidget, 0,0)
+                Uklad.addWidget(graphWidget, self.x,self.y)
+
                 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
