@@ -29,14 +29,17 @@ class From_File:
 
     def get_list_of_countries(filename):
         try:
+            it =0
             with open(filename, "r") as f:
                 list_of_coutries = []
                 for line in f:
-                    list_of_coutries.append(line.split(",")[1])
+                    if it>0:
+                        name = line.split(",")[1]
+                        list_of_coutries.append(name)
+                    it = it +1
                 return sorted(list(set(list_of_coutries)))
         except:
             print("Nie można otworzyć pliku")
-
 
 
 
