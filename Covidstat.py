@@ -3,15 +3,16 @@ from pyqtgraph import PlotWidget, plot
 from lib_repair import pyqtgraph as pg
 import sys
 import interfaces
-import numpy as np
+
 
 
 DATA_PATH = ""
+ALERT = ""
 LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT = []
 IS_LEGEND = True
 X_LOGARYTHMIC = False
 Y_LOGARYTHMIC = False
-Uklad = 0
+Uklad = None
 
 class Covidstat(QWidget):
     def __init__(self, parent=None):
@@ -30,16 +31,11 @@ class Covidstat(QWidget):
             
         
         Uklad = QGridLayout()
-        
         Section_Graph(0,0).add_section()       
-
         Section_add_file(0,1).add_section()
-           
         Section_list_of_countries(0,1).add_section()       
-
         Section_checkbox(1,1).add_section()
-
-        Section_alert_label(0,2).add_alert("")
+        Section_alert_label(0,2).add_alert(ALERT)
 
         self.setLayout(Uklad)
 
@@ -113,19 +109,21 @@ class List_of_countries(List):
         def __init__(self, x, y):
                 super().__init__(x,y)
         def add_list(self):
-                print(DATA_PATH)
+                
                 global Uklad
                 global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
                 listWidget = QListWidget()
-                
-                list_of_countries = interfaces.Data_interface.get_country_list(DATA_PATH)
                 try:
+                        list_of_countries = interfaces.Data_interface.get_country_list(DATA_PATH)
+                
                         checkdatapath()
                         for country in list_of_countries:
                                 listWidget.addItem(country)
                         listWidget.itemClicked.connect(lambda item: self.action_on_click(item))
                 except NoDataError:
-                        NoDataError.show_alert()
+                        NoDataError.show_alert("Lista")
+                except:
+                        NoDataError.show_alert("lista")
                 
                 Uklad.addWidget(listWidget, self.y,self.x)
 
@@ -136,7 +134,9 @@ class List_of_countries(List):
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.remove(item.text())
                 else:
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
+                
                 Section_Graph(0,0).add_section()
+        
 
 class Section_list_of_countries(Section):
         def __init__(self, x, y):
@@ -224,6 +224,8 @@ class Graph_of_countries(Graph):
         def __init__(self, x,y):
                 super().__init__(x,y)
         def addgraph(self):
+                global ALERT
+                global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
                 graphWidget = pg.PlotWidget()
                 graphWidget.setBackground('w')
                 colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'w']
@@ -232,15 +234,20 @@ class Graph_of_countries(Graph):
                 
                 i = 0
                 try:
+                        checkdatapath()
                         for country in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
                                 y = interfaces.Data_interface.list_of_cases_in_country(country,DATA_PATH)
                                 x = [i for i in range(len(y))]
                                 graphWidget.plot(x, y, pen=colors[i%8], name=country)
                                 graphWidget.setLogMode(X_LOGARYTHMIC,Y_LOGARYTHMIC)
                                 i = i+1
-                except:
-                        ValuesError.show_alert()
-                        print(DATA_PATH)
+                except NoDataError:
+                        NoDataError.show_alert("wykres")                                       
+                except:        
+                        del LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT[len(LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT)-1]
+                        
+                       
+                        
 
                         
                 
@@ -253,11 +260,11 @@ def checkdatapath():
 class Errors(Exception):
         pass
 class NoDataError(Errors):
-        def show_alert():
-                print("[Błąd]: Brak danych")
+        def show_alert(place):
+                print("[Błąd]["+str(place)+"]: Brak danych")
 class ValuesError(Errors):
-        def show_alert():
-                print("[Błąd]: Błędne wartości")
+        def show_alert(place):
+                print("[Błąd]["+str(place)+"]: Błędne wartości")
 
                 
                         

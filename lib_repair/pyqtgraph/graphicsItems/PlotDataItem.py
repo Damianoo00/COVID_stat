@@ -533,8 +533,8 @@ class PlotDataItem(GraphicsObject):
                 x = np.where(x>0, np.log10(x), 0)   #
             if self.opts['logMode'][1]:
                 #y = np.log10(y)
-                y = np.array(y)                     #
-                y = np.where(y>0, np.log10(y), 0)   # solve the problem of log10(0) -> error
+                y = np.array(y)                     # solve the problem of log10(0) -> error
+                y = np.where(y>0, np.log10(y), 0)   # 
             #if any(self.opts['logMode']):  ## re-check for NANs after log
                 #nanMask = np.isinf(x) | np.isinf(y) | np.isnan(x) | np.isnan(y)
                 #if any(nanMask):
