@@ -35,7 +35,7 @@ class Covidstat(QWidget):
         Section_add_file(0,1).add_section()
         Section_list_of_countries(0,1).add_section()       
         Section_checkbox(1,1).add_section()
-        Section_alert_label(0,2).add_alert(ALERT)
+        #Section_alert_label(0,2).add_alert(ALERT)
 
         self.setLayout(Uklad)
 
@@ -44,20 +44,20 @@ class Covidstat(QWidget):
 
 class Section:
         def __init__(self,x,y):
-                self.x = x
-                self.y = y
+                self._x = x
+                self._y = y
         def add_section():
                 pass
 class Add_file(QWidget):
         def __init__(self,x,y):
                 super().__init__(parent = None)
-                self.x = x
-                self.y = y
+                self._x = x
+                self._y = y
                 self.buttonlabel = "Wczytaj moje dane"
         def add_add_file(self):
                 afbtn = QPushButton(self.buttonlabel)
                 afbtn.clicked.connect(lambda: self.action_on_click())
-                Uklad.addWidget(afbtn, 0,1)
+                Uklad.addWidget(afbtn, self._x,self._y)
         def action_on_click(self):
                 global DATA_PATH
                 fname = QFileDialog.getOpenFileName(self, 'Open file', 
@@ -71,22 +71,22 @@ class Section_add_file(Section):
                 super().__init__(x,y)
                 
         def add_section(self):
-                Add_file(self.x,self.y).add_add_file() 
+                Add_file(self._x,self._y).add_add_file() 
 class Label:
         def __init__(self,x,y,text):
-                self.x = x
-                self.y = y
+                self._x = x
+                self._y = y
                 self.text = text
         def add_label(self):
                 label = QLabel(self.text)
-                Uklad.addWidget(label,self.y,self.x)
+                Uklad.addWidget(label,self._y,self._x)
 class Alert_label(Label):
         def __init__(self,x,y,text):
                 super().__init__(x,y,text)
         def add_label(self):
                 label = QLabel(self.text)
                 label.setStyleSheet('color: red')
-                Uklad.addWidget(label,self.y,self.x)
+                Uklad.addWidget(label,self._y,self._x)
 class Section_label(Section):
         def __init__(self, x, y):
                 super().__init__(x,y)
@@ -96,15 +96,15 @@ class Section_alert_label(Section_label):
         def __init__(self,x,y):
                 super().__init__(x,y)
         def add_alert(self,text_of_alert):
-                Alert_label(self.x,self.y, text_of_alert).add_label()
+                Alert_label(self._x,self._y, text_of_alert).add_label()
 
 class List:
         def __init__(self,x,y):
-                self.x = x
-                self.y = y
+                self._x = x
+                self._y = y
         def add_list(self):
                 listWidget = QListWidget()
-                Uklad.addWidget(listWidget, self.x,self.y)
+                Uklad.addWidget(listWidget, self._x,self._y)
 class List_of_countries(List):
         def __init__(self, x, y):
                 super().__init__(x,y)
@@ -125,7 +125,7 @@ class List_of_countries(List):
                 except:
                         NoDataError.show_alert("lista")
                 
-                Uklad.addWidget(listWidget, self.y,self.x)
+                Uklad.addWidget(listWidget, self._y,self._x)
 
         def action_on_click(self, item):
                 
@@ -143,11 +143,11 @@ class Section_list_of_countries(Section):
                 super().__init__(x,y)
                 
         def add_section(self):
-                List_of_countries(self.x,self.y).add_list()
+                List_of_countries(self._x,self._y).add_list()
 class Checkbox:
         def __init__(self,x,y):
-                self.x = x
-                self.y = y
+                self._x = x
+                self._y = y
                 self.boolen = boolen = None
                 self.text = text = None
                 
@@ -155,7 +155,7 @@ class Checkbox:
                 b1 = QCheckBox(self.text)
                 b1.setChecked(self.boolen)
                 b1.stateChanged.connect(lambda:self.action_on_click())
-                Uklad.addWidget(b1,self.x,self.y)
+                Uklad.addWidget(b1,self._x,self._y)
         def action_on_click(self):
                 pass
 class legend_checkbox(Checkbox):
@@ -199,9 +199,9 @@ class Section_checkbox(Section):
                 super().__init__(x,y)
 
         def add_section(self):
-                legend_checkbox(self.y,self.x).add_checkbox()
-                y_axis_log_checkbox(self.y+1,self.x).add_checkbox()
-                x_axis_log_checkbox(self.y+2,self.x).add_checkbox()
+                legend_checkbox(self._y,self._x).add_checkbox()
+                y_axis_log_checkbox(self._y+1,self._x).add_checkbox()
+                x_axis_log_checkbox(self._y+2,self._x).add_checkbox()
         
 
 
@@ -210,7 +210,7 @@ class Section_Graph(Section):
         def __init__(self,x,y):
                 super().__init__(x,y)
         def add_section(self):
-                Graph_of_countries(self.x,self.y).addgraph()
+                Graph_of_countries(self._x,self._y).addgraph()
                 
 class Graph(Section_Graph):
         def __init__(self, x,y):
@@ -218,7 +218,7 @@ class Graph(Section_Graph):
         def addgraph(self):
                 graphWidget = pg.PlotWidget()
                                
-                Uklad.addWidget(graphWidget, self.x,self.y)
+                Uklad.addWidget(graphWidget, self._x,self._y)
 
 class Graph_of_countries(Graph):
         def __init__(self, x,y):
@@ -252,7 +252,7 @@ class Graph_of_countries(Graph):
                         
                 
                 
-                Uklad.addWidget(graphWidget, self.x,self.y)
+                Uklad.addWidget(graphWidget, self._x,self._y)
 def checkdatapath():
         if DATA_PATH == "":
                 raise NoDataError
