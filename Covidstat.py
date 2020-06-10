@@ -188,15 +188,7 @@ class List_of_countries(List):
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
                 
                 Section_Graph(0,0).add_section()
-
-def ff():
-        global DIFF
-        DIFF = False
-        Section_Graph(0,0).add_section()
-def fff():
-        global DIFF
-        DIFF = True
-        Section_Graph(0,0).add_section()        
+       
 
 class Section_list_of_countries(Section):
         def __init__(self, x, y):
