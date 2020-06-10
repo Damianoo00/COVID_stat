@@ -1,0 +1,212 @@
+from PyQt5.QtWidgets import QApplication, QMessageBox ,QWidget, QGridLayout, QLabel, QFileDialog, QPushButton, QListWidget, QCheckBox, QButtonGroup
+from pyqtgraph import PlotWidget, plot
+from lib_repair import pyqtgraph as pg
+import sys
+import interfaces
+
+
+
+DATA_PATH = ""
+ALERT = ""
+LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT = []
+IS_LEGEND = True
+X_LOGARYTHMIC = False
+Y_LOGARYTHMIC = False
+Uklad = None
+
+class Covidstat(QWidget):
+    def __init__(self, parent=None):      
+        
+
+    def interface(self):
+        -inicjowanie Układu
+        -Wstawienie sekcji
+
+
+
+
+class Section:
+        def __init__(self,x,y):
+                -Ogólna klasa dla sekcji
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+class Add_file(QWidget):
+        def __init__(self,x,y):
+                
+        def add_add_file(self):
+                -Dodanie funkcjonalności wczytywania pliku
+        def action_on_click(self):
+                -Akcja związana z kliknięciem na przycisk 
+
+class Section_add_file(Section):
+        def __init__(self, x, y):
+                
+                
+        def add_section(self):
+                -Dodawanie do sekcji funkcjonalnośi wczytywania plików
+class Label:                                                                |
+        def __init__(self,x,y,text):                                        |
+                                                                            |
+        def add_label(self):                                                |        
+                -Ogólna klasa napisów                                       |
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna   |
+class Alert_label(Label):                                                   |
+        def __init__(self,x,y,text):                                        |
+                                                                            |
+        def add_label(self):                                                |
+                -Klasa konkretnego napisu(Metoda Wykonawcza)                |
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna   | Zrobione pod wyświetlanie błędów(wyjątków w GUI)
+class Section_label(Section):                                               | Ale... nie używane :)
+        def __init__(self, x, y):                                           |
+                                                                            |
+        def add_section(self):                                              |
+                -Ogólna klasa dla sekcji napisów                            |
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna   |
+class Section_alert_label(Section_label):                                   |
+        def __init__(self,x,y):                                             |
+                                                                            |
+        def add_alert(self,text_of_alert):                                  |
+                -Konkretna klasa dla sekcji napisów                         |
+                -metoda wykonawcza                                          |
+
+class List:
+        def __init__(self,x,y):
+                self._x = x
+                self._y = y
+        def add_list(self):
+                -Ogólna klasa dla listy
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+class List_of_countries(List):
+
+        def __init__(self, x, y):
+                super().__init__(x,y)
+        def add_list(self):
+                -Szczególna klasa dla listy
+                -Metoda wykonawcza
+                -Wczytywanie danych do wykresu z pliku (nazw państw)
+
+        def action_on_click(self, item):
+                
+                -Akcja na kliknięcie w element listy
+                -Dodanie państwa do zmiennej globalnej LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
+                -Utworzenie nowej sekcji wykresu
+        
+
+class Section_list_of_countries(Section):
+        def __init__(self, x, y):
+                super().__init__(x,y)
+                
+        def add_section(self):
+                -Szczególna klasa dla listy
+                -Metoda Wykonawcza
+class Checkbox:
+        def __init__(self,x,y):
+                
+                
+        def add_checkbox(self):
+                -Ogólna klasa dla checkboxow
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+        def action_on_click(self):
+                pass
+class legend_checkbox(Checkbox):
+        def __init__(self,x,y):
+                
+                -Szczególna klasa dla checkboxow
+                -Metoda wykonawcza
+class y_axis_log_checkbox(Checkbox):
+        def __init__(self,x,y):
+                -Szczególna klasa dla checkboxow
+                -Metoda wykonawcza
+class x_axis_log_checkbox(Checkbox):
+        def __init__(self,x,y):
+                -Szczególna klasa dla checkboxow
+                -Metoda wykonawcza
+class Section_checkbox(Section):
+        def __init__(self, x, y):
+                super().__init__(x,y)
+
+        def add_section(self):
+                -Ogólna klasa dla klasy checkboxow
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+                -Wstawienie checkboxow
+        
+
+
+
+class Section_Graph(Section):
+        def __init__(self,x,y):
+                super().__init__(x,y)
+        def add_section(self):
+                -Ogólna klasa dla sekcji wykresow
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+                -Wstawienie wykresu
+                
+class Graph(Section_Graph):
+        def __init__(self, x,y):
+                super().__init__(x,y)
+        def addgraph(self):
+                -Ogólna klasa dla wykresow
+                -Implementacja zależna od abstrakcji/Fabryka abstrakcyjna
+
+class Graph_of_countries(Graph):
+        def __init__(self, x,y):
+                super().__init__(x,y)
+        def addgraph(self):
+               -Szczegóólna klasa dla wykresow
+               -Metoda Wykonawcza
+               -Wyswietlenie na wykresie danych dla pansw ze zmiennej globalnej
+               -kontrola błędow: usuniecie ze zmiennej globalnej państwa ktore ma niepoprawne dany, aby błąd nie eskalował
+def checkdatapath():
+        -Sprawdza czy jest jakaś ścieżka do pliku i zwraca NoDataError
+        
+class Errors(Exception):
+        pass
+class NoDataError(Errors):
+        def show_alert(place):
+                -Wskauje gdzie wystąpił błąd NoDataError
+class ValuesError(Errors):
+        def show_alert(place):
+                -Wyłąpuje wszystkie błędy związane z danymi i wyświetla gdzie (place) wystąpił błąd
+
+                
+                        
+                
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    okno = Covidstat()
+    sys.exit(app.exec_())
+----------------------------------------------------------------------------------------------------
+read_file.py
+----------------------------------------------------------------------------------------------------
+
+        
+    def read_data_for_country(filename, countries):
+        -Otwiera plik
+        -Sumuje dane z różnych regionów dla danego państwa
+        -zwraca słownik dict() [państwo:{wektor danych}]
+
+    def write_cases_to_vec(data_line):
+        -Omija odpowiednią ilość kolumn
+        -oddziela dane po przecinku i pakuje do wektora 
+
+    def get_list_of_countries(filename):
+        -zwraca listę występujących państw (bez powtórek)
+----------------------------------------------------------------------------------------------------
+interfaces.py 
+----------------------------------------------------------------------------------------------------
+-interfejsy danych
+-Adapter
+
+class Data_interface:
+    def get_country_list(filepath):
+        -zwraca listę państw występujących w pliku (bez powtórek)
+    def get_cases_for_countrys_in_list(filepath, countrynames):
+        -zwraca dane dla każdego poństwa znjdującego się w liscie [countrynames]
+        -kontrola błędów: przechwytywanie wszystkich wyjątków do ValuesError
+    def get_cases_for_countrys_in_string(filepath, countrynames):               |
+        -to samo co powyżej, tylko dla danych zapisanych w stringu nie liscie   |
+    def listtostring(lista):                                                    | Nie używane :)
+        -zamiana listy na string                                                |
+    def list_of_cases_in_country(countryname, filepath):
+        -zaminia wartości ze słownika na listę
+    
+        
