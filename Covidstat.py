@@ -3,6 +3,7 @@ from pyqtgraph import PlotWidget, plot
 from lib_repair import pyqtgraph as pg
 import sys
 import interfaces
+import numpy as np
 
 
 
@@ -13,6 +14,7 @@ IS_LEGEND = True
 X_LOGARYTHMIC = False
 Y_LOGARYTHMIC = False
 Uklad = None
+DIFF = False
 
 class Covidstat(QWidget):
     def __init__(self, parent=None):
@@ -36,6 +38,7 @@ class Covidstat(QWidget):
         Section_list_of_countries(0,1).add_section()       
         Section_checkbox(1,1).add_section()
         #Section_alert_label(0,2).add_alert(ALERT)
+        Section_chose_option_of_show_graph(2,0).add_section()
 
         self.setLayout(Uklad)
 
@@ -48,14 +51,63 @@ class Section:
                 self._y = y
         def add_section():
                 pass
+class Section_chose_option_of_show_graph(Section):
+        def __init__(self, x, y):
+                super().__init__(x,y)
+                
+        def add_section(self):
+                Cases_button(self._x,self._y, "Liczba odnotowanych przypadków").add_button()
+                Diff_button(self._x+1,self._y, "Dzienny przyrost nowych przypadków").add_button()
+class Button:
+        def __init__(self,x,y,text):
+                self._x = x
+                self._y = y
+                self._text = text
+        def add_button(self):
+                button = QPushButton(self._text)
+                button.clicked.connect(lambda: self.action_on_click())
+                Uklad.addWidget(button,self._x,self._y)
+        def action_on_click(self):
+                pass
+class Cases_button(Button):
+        def __init__(self,x,y,text):
+                super().__init__(x,y, text)
+        
+        
+        def action_on_click(self):
+                global DIFF
+                DIFF = False
+                Section_Graph(0,0).add_section()
+class Diff_button(Button):
+        def __init__(self,x,y,text):
+                super().__init__(x,y, text)
+        
+        def action_on_click(self):
+                global DIFF
+                DIFF = True
+                Section_Graph(0,0).add_section()
+
+class Add_file_button(Button):
+        def __init__(self,x,y,text):
+                super().__init__(x,y, text)
+        
+        def action_on_click(self):
+                global DATA_PATH
+                fname = QFileDialog.getOpenFileName(self, 'Open file', 
+                '~/Documents/Edukacja/PO/PO_proj',"(*.csv)")
+        
+                DATA_PATH = fname[0]
+                Section_list_of_countries(0,1).add_section() 
+
+
 class Add_file(QWidget):
-        def __init__(self,x,y):
+        def __init__(self,x,y,text):
                 super().__init__(parent = None)
                 self._x = x
                 self._y = y
-                self.buttonlabel = "Wczytaj moje dane"
+                self._text = text
         def add_add_file(self):
-                afbtn = QPushButton(self.buttonlabel)
+                afbtn = QPushButton(self._text)
                 afbtn.clicked.connect(lambda: self.action_on_click())
                 Uklad.addWidget(afbtn, self._x,self._y)
         def action_on_click(self):
@@ -71,7 +123,7 @@ class Section_add_file(Section):
                 super().__init__(x,y)
                 
         def add_section(self):
-                Add_file(self._x,self._y).add_add_file() 
+                Add_file(self._x,self._y, "Wczytaj moje dane").add_add_file() 
 class Label:
         def __init__(self,x,y,text):
                 self._x = x
@@ -136,7 +188,15 @@ class List_of_countries(List):
                         LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
                 
                 Section_Graph(0,0).add_section()
-        
+
+def ff():
+        global DIFF
+        DIFF = False
+        Section_Graph(0,0).add_section()
+def fff():
+        global DIFF
+        DIFF = True
+        Section_Graph(0,0).add_section()        
 
 class Section_list_of_countries(Section):
         def __init__(self, x, y):
@@ -237,6 +297,8 @@ class Graph_of_countries(Graph):
                         checkdatapath()
                         for country in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
                                 y = interfaces.Data_interface.list_of_cases_in_country(country,DATA_PATH)
+                                if DIFF == True:
+                                        y = np.diff(np.array(interfaces.Data_interface.list_of_cases_in_country(country,DATA_PATH))).tolist()
                                 x = [i for i in range(len(y))]
                                 graphWidget.plot(x, y, pen=colors[i%8], name=country)
                                 graphWidget.setLogMode(X_LOGARYTHMIC,Y_LOGARYTHMIC)
