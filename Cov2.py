@@ -27,7 +27,7 @@ class Covidstat(QWidget):
 
     def interface(self):
         global Uklad
-        self.resize(600, 300)
+        self.resize(900, 450)
         self.setWindowTitle("COVID statystyki")
         self.show()
 
@@ -37,7 +37,7 @@ class Covidstat(QWidget):
         SectionListOfCountries(0, 1).add_section()
         SectionCheckbox(1, 1).add_section()
         # Section_alert_label(0,2).add_alert(ALERT)
-        SectionChoseOptionOfShowGraph(2, 0).add_section()
+        SectionChoseOptionOfShowGraph(3, 0).add_section()
 
         self.setLayout(Uklad)
 
@@ -214,20 +214,43 @@ class ListOfCountries(List):
             LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.remove(item.text())
         else:
             LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
-
+        ListOfChosenCountries(self._x, self._y+1).add_list()
         SectionGraph(0, 0).add_section()
 
+class ListOfChosenCountries(List):
+    def __init__(self, x, y):
+        super().__init__(x, y)
 
-def ff():
-    global DIFF
-    DIFF = False
-    SectionGraph(0, 0).add_section()
+    def add_list(self):
+
+        global Uklad
+        list_widget = QListWidget()
+        try:
+            list_of_countries = LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
+
+            for country in list_of_countries:
+                list_widget.addItem(country)
+            list_widget.itemClicked.connect(lambda item: self.action_on_click(item))
+        except TypeError:
+            print(NoDataError("Lista"))
+       # except:
+        #    print(NoDataError("lista"))
+
+        Uklad.addWidget(list_widget, self._y, self._x)
+
+    def action_on_click(self, item):
+
+        global LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT
+        if item.text() in LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT:
+            LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.remove(item.text())
+        else:
+            LIST_OF_COUNTRIES_TO_SHOW_ON_PLOT.append(item.text())
+
+        SectionGraph(0, 0).add_section()
+        ListOfChosenCountries(self._x, self._y).add_list()
 
 
-def fff():
-    global DIFF
-    DIFF = True
-    SectionGraph(0, 0).add_section()
+
 
 
 class SectionListOfCountries(Section):
@@ -236,6 +259,7 @@ class SectionListOfCountries(Section):
 
     def add_section(self):
         ListOfCountries(self._x, self._y).add_list()
+        ListOfChosenCountries(self._x, self._y+1).add_list()
 
 
 class Checkbox:
