@@ -40,5 +40,5 @@ class FromFile:
                         list_of_countries.append(name)
                     it = it + 1
                 return sorted(list(set(list_of_countries)))
-        except:
+        except FileNotFoundError:
             print(ValuesError("Interfejs danych"))

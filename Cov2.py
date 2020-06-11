@@ -1,11 +1,13 @@
 from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget, QGridLayout, QLabel, QFileDialog, QPushButton, \
     QListWidget, QCheckBox, QButtonGroup
-
 from Exceptions import NoDataError
 from Inter2 import DataInterface
 from lib_repair import pyqtgraph as pg
 import sys
 import numpy as np
+import warnings
+import os
+
 
 DATA_PATH = ""
 ALERT = ""
@@ -198,10 +200,10 @@ class ListOfCountries(List):
             for country in list_of_countries:
                 list_widget.addItem(country)
             list_widget.itemClicked.connect(lambda item: self.action_on_click(item))
-        except NoDataError:
+        except TypeError:
             print(NoDataError("Lista"))
-        except:
-            print(NoDataError("lista"))
+       # except:
+        #    print(NoDataError("lista"))
 
         Uklad.addWidget(list_widget, self._y, self._x)
 
@@ -363,6 +365,7 @@ def check_data_path():
 
 
 if __name__ == '__main__':
+    warnings.filterwarnings("ignore")
     app = QApplication(sys.argv)
     window = Covidstat()
     sys.exit(app.exec_())

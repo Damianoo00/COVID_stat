@@ -1,0 +1,32 @@
+Cel: Przedstawienie graficzne danych statystycznych związanych z chorobą COVID-19
+Wykożystane wzorce projektowe:
+-Metoda Wytwórcza
+-Fabryka Abstrakcyjna
+-Adapter
+Występujące elementy SOLID:
+-1 moduł dla 1 aktora
+-otwarty na rozbudowe
+-klasy bazowe maja tyle samo metod co klasy pochodne
+-Zależność kodu od abstrakcji
+Dane testowe:
+-Dane poprawne:
+./przykladowe_dane.txt
+-Dane niepoprawne:
+    ./testy/testowe_dane.csv
+    Dane csv z wielokrotnymi pustymi komorkami
+    ./testy/test2.csv
+    Plik JPG z ręcznie zmienionym rozszerzeniem na csv
+
+Udało się:
+-Pobranie danych z własnego dysku po naciśnięciu odpowiedniego przycisku
+-Przedstawienie listy możliwych do odczytania danych
+-Odczytanie odpowiednich danych poprzez obecne interface-y
+-Przedstawienie graficzne danych na wykresie po wybraniu ich z listy
+-Możliwość przedstawienia wielu serii danych na jednym wykresie
+-Pojawienie się i zniknięcie legendy po zaznaczeniu odpowiedniego chckboxa
+-Zmiana skali na logarytmiczna dla osi x lub y po zaznaczeniu odpowiedniego checkboxa
+-Przedstawienie dziennego przyrostu nowych przypadków po wybraniu odpowiedniego przycisku oraz powrót do przedstawienia liczby odnotowanych przypadków
+
+Nie udało się:
+-Zrezygnowaliśmy z drugiej listy, na której miały się pokazywać dane obecnie wyświetlane na wykresie, ponieważ straciła ona swoje znaczenie przy obecnej legendzie i alfabetycznie posortowanej (1.) liscie
+-Przedstawienie napisu w GIU przedstawiającego komunikaty o występujących błędach (wyjątkach)
