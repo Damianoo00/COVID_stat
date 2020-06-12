@@ -1,36 +1,21 @@
-
-from Exceptions import ValuesError
 from Read2 import FromFile
 
 
 class DataInterface:
-    def get_country_list(self, filepath):
-        r = FromFile().get_list_of_countries(filepath)
+    def validation(self, file_path):
+        valid = FromFile().check_data_path(file_path)
+        if valid:
+            valid = FromFile().validate_data(file_path)
+        return valid
+
+    def get_country_list(self, file_path):
+        r = FromFile().get_list_of_countries(file_path)
         return r
 
-    def get_cases_for_countries_in_list(self, filepath, countrynames):
-        try:
-            r = FromFile().read_data_for_countries(filepath, DataInterface().listtostring(countrynames))
-        except:
-            print(ValuesError("Wykres"))
-            r = 0
-
+    def get_cases_for_country_in_string(self, file_path, country_names):
+        r = FromFile().read_data_for_countries(file_path, country_names)
         return r
 
-    def get_cases_for_countries_in_string(self, filepath, country_names):
-        try:
-            r = FromFile().read_data_for_countries(filepath, country_names)
-        except:
-            print(ValuesError("Wykres"))
-            r = 0
-        return r
-
-    def listtostring(self, lista):
-        s = ""
-        for country in lista:
-            s = s + "," + country
-        return s
-
-    def list_of_cases_in_country(self, countryname, filepath):
-        dicta = DataInterface().get_cases_for_countries_in_string(filepath, countryname)
-        return dicta[countryname]
+    def list_of_cases_in_country(self, country_name, file_path):
+        dicta = self.get_cases_for_country_in_string(file_path, country_name)
+        return dicta[country_name]

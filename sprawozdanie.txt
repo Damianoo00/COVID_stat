@@ -1,8 +1,11 @@
 Cel: Przedstawienie graficzne danych statystycznych związanych z chorobą COVID-19
 Wykożystane wzorce projektowe:
 -Metoda Wytwórcza
+    Pozwala na zrealizowanie zasady zależności klasy od abstrakcji, a nie konkretnej implementacji
 -Fabryka Abstrakcyjna
+    Wraz z fabryką abstarakcyjną pozwala na zrealizowanie zasady zależności klasy od abstrakcji
 -Adapter
+    Umożliwa wykożystanie wcześniej utworzonych funkcji dla wcześniejszych wersji programu
 Występujące elementy SOLID:
 -1 moduł dla 1 aktora
 -otwarty na rozbudowe
@@ -22,11 +25,15 @@ Udało się:
 -Przedstawienie listy możliwych do odczytania danych
 -Odczytanie odpowiednich danych poprzez obecne interface-y
 -Przedstawienie graficzne danych na wykresie po wybraniu ich z listy
+-Ułatwienie usuwania danych z wykresu przez naciśnięcie nazwy odpowiedniego państwa na drugiej mniejszej liście
 -Możliwość przedstawienia wielu serii danych na jednym wykresie
 -Pojawienie się i zniknięcie legendy po zaznaczeniu odpowiedniego chckboxa
 -Zmiana skali na logarytmiczna dla osi x lub y po zaznaczeniu odpowiedniego checkboxa
 -Przedstawienie dziennego przyrostu nowych przypadków po wybraniu odpowiedniego przycisku oraz powrót do przedstawienia liczby odnotowanych przypadków
 
 Nie udało się:
--Zrezygnowaliśmy z drugiej listy, na której miały się pokazywać dane obecnie wyświetlane na wykresie, ponieważ straciła ona swoje znaczenie przy obecnej legendzie i alfabetycznie posortowanej (1.) liscie
 -Przedstawienie napisu w GIU przedstawiającego komunikaty o występujących błędach (wyjątkach)
+
+Zmiany:
+-dodanie osobnej klasy do obsługi funkcji skali logarytmicznej osobno dla osi x oraz y
+-rozszerzenie zakresu funkcji obsługujących błędy
