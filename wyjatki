@@ -1,2 +1,2 @@
-Błędy dla Państw Niger, Dominica ze względu na to, że zawierają się w nazwach Nigeria, Dominicana
-Błąd dla Korea
+Błąd dla "Korea, South" i "Bonaire, Sint Eustatius and Saba" w "Netherlands" ze względu na obecność w nazwach przecinków, które są używane do poprawnego podziału pliku źródłowego i wczytania danych.
+W celu usunięcia błędu należy w pliku "time_series_covid19_confirmed_global.csv" usunąć przecinki w komórkach B145 i A257 lub zamienić je na inny znak oraz zapisać zmiany.

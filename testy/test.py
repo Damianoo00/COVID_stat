@@ -1,13 +1,13 @@
-import matplotlib.pyplot as plt
-import interfaces
+from Origin import interfaces
+
 sorce = "prykladowe_dane.csv"
-list_of_data = interfaces.Data_interface.get_country_list(sorce)
+list_of_data = interfaces.DataInterface.get_country_list(sorce)
 blad=0
 prob=0
 lista_blednych_danych = []
 for country in list_of_data:
     try:
-        y = interfaces.Data_interface.list_of_cases_in_country(country,sorce)
+        y = interfaces.DataInterface.list_of_cases_in_country(country, sorce)
         x = [i for i in range(len(y))]
             #plt.plot(x, y)
         prob = prob + 1

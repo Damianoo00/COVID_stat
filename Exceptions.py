@@ -3,13 +3,16 @@ class Errors(Exception):
         self._message = "[Błąd][" + str(place) + "]: "
         super().__init__(self._message)
 
-    # def __str__(self):
-    #     return self._message
-
 
 class NoDataError(Errors):
     def __str__(self):
         self._message = self._message + "Brak danych"
+        return self._message
+
+
+class NonNumericError(Errors):
+    def __str__(self):
+        self._message = self._message + "Dane nienumeryczne"
         return self._message
 
 
@@ -21,7 +24,7 @@ class ValuesError(Errors):
 
 class CommaError(Errors):
     def __str__(self):
-        self._message = self._message + "Należy usunąć przecinek"
+        self._message = self._message + "Możliwy przecinek w nazwie lub różnica o 1 w długościach wierszy"
         return self._message
 
 
