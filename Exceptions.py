@@ -24,7 +24,7 @@ class ValuesError(Errors):
 
 class CommaError(Errors):
     def __str__(self):
-        self._message = self._message + "Możliwy przecinek w nazwie lub różnica o 1 w długościach wierszy"
+        self._message = self._message + "Możliwy przecinek w nazwie lub różnica o 1 w długościach wierszy danych"
         return self._message
 
 
@@ -32,5 +32,3 @@ class UnevenDataError(Errors):
     def __str__(self):
         self._message = self._message + "Wiersze danych różnej długości"
         return self._message
-
-

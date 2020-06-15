@@ -1,13 +1,13 @@
-from Origin import interfaces
+from Interfaces import DataInterface
 
-sorce = "prykladowe_dane.csv"
+sorce = "testy/time_series_covid19_confirmed_global.csv"
 list_of_data = interfaces.DataInterface.get_country_list(sorce)
 blad=0
 prob=0
 lista_blednych_danych = []
 for country in list_of_data:
     try:
-        y = interfaces.DataInterface.list_of_cases_in_country(country, sorce)
+        y = DataInterface.list_of_cases_in_country(country, sorce)
         x = [i for i in range(len(y))]
             #plt.plot(x, y)
         prob = prob + 1
