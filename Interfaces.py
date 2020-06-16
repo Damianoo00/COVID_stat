@@ -1,11 +1,11 @@
-from ReadFile import FromFile
+from ReadFile import FromFile, Validation
 
 
 class DataInterface:
     def validation(self, file_path):
-        valid = FromFile().check_data_path(file_path)
+        valid = Validation().check_data_path(file_path)
         if valid:
-            valid = FromFile().validate_data(file_path)
+            valid = Validation().validate_data(file_path)
         return valid
 
     def get_country_list(self, file_path):

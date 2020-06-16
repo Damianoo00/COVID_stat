@@ -25,6 +25,9 @@ class GraphOfCountries(Graph):
     def add_graph(self):
         graph_widget = PlotWidget()
         graph_widget.setBackground('w')
+        style = {'color': 'b', 'font-size': '18px'}
+        graph_widget.setLabel('left', 'Liczba potwierdzonych przypadków', **style)
+        graph_widget.setLabel('bottom', 'Kolejne dni od 22. stycznia 2020 r.', **style)
         if var.get_is_legend():
             graph_widget.addLegend()
         if var.get_valid():

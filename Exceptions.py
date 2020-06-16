@@ -32,3 +32,15 @@ class UnevenDataError(Errors):
     def __str__(self):
         self._message = self._message + "Wiersze danych różnej długości"
         return self._message
+
+
+class NumericNameError(Errors):
+    def __str__(self):
+        self._message = self._message + "Nazwa państwa nie zawiera liter"
+        return self._message
+
+
+class NoCountryError(Errors):
+    def __str__(self):
+        self._message = self._message + "Brak co najmniej jednej nazwy państwa"
+        return self._message
